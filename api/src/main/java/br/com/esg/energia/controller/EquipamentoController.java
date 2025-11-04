@@ -19,10 +19,6 @@ public class EquipamentoController {
         this.equipamentoService = equipamentoService;
     }
 
-    /**
-     * GET /equipamentos - Lista todos os equipamentos
-     * Pode filtrar por setorId
-     */
     @GetMapping
     @PreAuthorize("hasAnyRole('ANALISTA','GESTOR_SETOR','ADMIN')")
     public ResponseEntity<List<EquipamentoDtos.View>> listar(@RequestParam(required = false) Long setorId) {
@@ -30,9 +26,6 @@ public class EquipamentoController {
         return ResponseEntity.ok(equipamentos);
     }
 
-    /**
-     * GET /equipamentos/{id} - Busca um equipamento específico
-     */
     @GetMapping("/{id}")
     @PreAuthorize("hasAnyRole('ANALISTA','GESTOR_SETOR','ADMIN')")
     public ResponseEntity<EquipamentoDtos.View> buscarPorId(@PathVariable Long id) {
@@ -40,9 +33,6 @@ public class EquipamentoController {
         return ResponseEntity.ok(equipamento);
     }
 
-    /**
-     * POST /equipamentos - Cria um novo equipamento
-     */
     @PostMapping
     @PreAuthorize("hasAnyRole('GESTOR_SETOR','ADMIN')")
     public ResponseEntity<EquipamentoDtos.View> criar(@RequestBody EquipamentoDtos.Create dto) {
@@ -50,9 +40,6 @@ public class EquipamentoController {
         return ResponseEntity.status(HttpStatus.CREATED).body(equipamento);
     }
 
-    /**
-     * PUT /equipamentos/{id} - Atualiza um equipamento existente
-     */
     @PutMapping("/{id}")
     @PreAuthorize("hasAnyRole('GESTOR_SETOR','ADMIN')")
     public ResponseEntity<EquipamentoDtos.View> atualizar(
@@ -63,9 +50,6 @@ public class EquipamentoController {
         return ResponseEntity.ok(equipamento);
     }
 
-    /**
-     * DELETE /equipamentos/{id} - Remove um equipamento
-     */
     @DeleteMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> deletar(@PathVariable Long id) {
