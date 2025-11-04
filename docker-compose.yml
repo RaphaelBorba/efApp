@@ -1,0 +1,11 @@
+version: '3.8'
+services:
+  api:
+    build: ./api
+    container_name: ef-api
+    environment:
+      - APP_JWT_SECRET=bXlzdXBlcnNlY3JldGtleWZvcmp3dHRva2VuZ2VuZXJhdGlvbjI1NmJpdHM=
+      - SPRING_PROFILES_ACTIVE=dev
+    ports:
+      - "8080:8080"
+    restart: unless-stopped

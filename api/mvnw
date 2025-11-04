@@ -1,0 +1,6 @@
+#!/bin/sh
+# Maven Wrapper Script
+MAVEN_PROJECTBASEDIR=${MAVEN_BASEDIR:-"$BASE_DIR"}
+cd "$MAVEN_PROJECTBASEDIR"
+MAVEN_OPTS="$MAVEN_OPTS -Xmx1024m"
+exec java $MAVEN_OPTS -classpath .mvn/wrapper/maven-wrapper.jar org.apache.maven.wrapper.MavenWrapperMain "$@"

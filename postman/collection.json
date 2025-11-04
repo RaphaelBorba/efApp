@@ -1,0 +1,117 @@
+{
+  "info": {
+    "name": "EF Energia API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Auth /token",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "url": { "raw": "{{baseUrl}}/auth/token", "host": ["{{baseUrl}}"], "path": ["auth","token"] },
+        "body": { "mode": "raw", "raw": "{\n  \"username\": \"tester\",\n  \"roles\": \"ADMIN\"\n}" }
+      }
+    },
+    {
+      "name": "Leituras - POST",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Authorization", "value": "Bearer {{token}}" }
+        ],
+        "url": { "raw": "{{baseUrl}}/leituras", "host": ["{{baseUrl}}"], "path": ["leituras"] },
+        "body": { "mode": "raw", "raw": "{\n  \"equipamentoId\": 1,\n  \"consumoKwh\": 4.5,\n  \"timestampLeitura\": \"2025-01-01T10:00:00\"\n}" }
+      }
+    },
+    {
+      "name": "Leituras - GET",
+      "request": {
+        "method": "GET",
+        "header": [ { "key": "Authorization", "value": "Bearer {{token}}" } ],
+        "url": {
+          "raw": "{{baseUrl}}/leituras?equipamentoId=1&inicio=2025-01-01T00:00:00&fim=2025-01-02T00:00:00",
+          "host": ["{{baseUrl}}"],
+          "path": ["leituras"],
+          "query": [
+            { "key": "equipamentoId", "value": "1" },
+            { "key": "inicio", "value": "2025-01-01T00:00:00" },
+            { "key": "fim", "value": "2025-01-02T00:00:00" }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Alertas - GET",
+      "request": {
+        "method": "GET",
+        "header": [ { "key": "Authorization", "value": "Bearer {{token}}" } ],
+        "url": {
+          "raw": "{{baseUrl}}/alertas",
+          "host": ["{{baseUrl}}"],
+          "path": ["alertas"]
+        }
+      }
+    },
+    {
+      "name": "Governança - validar meta mensal",
+      "request": {
+        "method": "POST",
+        "header": [ { "key": "Authorization", "value": "Bearer {{token}}" } ],
+        "url": {
+          "raw": "{{baseUrl}}/governanca/validar-meta-mensal?setorId=1&anoMes=2025-01",
+          "host": ["{{baseUrl}}"],
+          "path": ["governanca","validar-meta-mensal"],
+          "query": [
+            { "key": "setorId", "value": "1" },
+            { "key": "anoMes", "value": "2025-01" }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Setores - GET",
+      "request": {
+        "method": "GET",
+        "header": [ { "key": "Authorization", "value": "Bearer {{token}}" } ],
+        "url": {
+          "raw": "{{baseUrl}}/setores",
+          "host": ["{{baseUrl}}"],
+          "path": ["setores"]
+        }
+      }
+    },
+    {
+      "name": "Equipamentos - GET",
+      "request": {
+        "method": "GET",
+        "header": [ { "key": "Authorization", "value": "Bearer {{token}}" } ],
+        "url": {
+          "raw": "{{baseUrl}}/equipamentos",
+          "host": ["{{baseUrl}}"],
+          "path": ["equipamentos"]
+        }
+      }
+    },
+    {
+      "name": "Equipamentos por Setor - GET",
+      "request": {
+        "method": "GET",
+        "header": [ { "key": "Authorization", "value": "Bearer {{token}}" } ],
+        "url": {
+          "raw": "{{baseUrl}}/equipamentos?setorId=1",
+          "host": ["{{baseUrl}}"],
+          "path": ["equipamentos"],
+          "query": [
+            { "key": "setorId", "value": "1" }
+          ]
+        }
+      }
+    }
+  ]
+}
+
+
