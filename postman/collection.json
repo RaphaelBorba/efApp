@@ -110,6 +110,68 @@
           ]
         }
       }
+    },
+    {
+      "name": "Equipamentos - GET por ID",
+      "request": {
+        "method": "GET",
+        "header": [ { "key": "Authorization", "value": "Bearer {{token}}" } ],
+        "url": {
+          "raw": "{{baseUrl}}/equipamentos/1",
+          "host": ["{{baseUrl}}"],
+          "path": ["equipamentos", "1"]
+        }
+      }
+    },
+    {
+      "name": "Equipamentos - POST (Criar)",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Authorization", "value": "Bearer {{token}}" }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/equipamentos",
+          "host": ["{{baseUrl}}"],
+          "path": ["equipamentos"]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"setorId\": 1,\n  \"nome\": \"Ar Condicionado 05\",\n  \"tipo\": \"Climatização\",\n  \"potenciaNominal\": 15.5\n}"
+        }
+      }
+    },
+    {
+      "name": "Equipamentos - PUT (Atualizar)",
+      "request": {
+        "method": "PUT",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Authorization", "value": "Bearer {{token}}" }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/equipamentos/3",
+          "host": ["{{baseUrl}}"],
+          "path": ["equipamentos", "3"]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nome\": \"Ar Condicionado 05 - Premium\",\n  \"tipo\": \"Climatização Avançada\",\n  \"potenciaNominal\": 20.0\n}"
+        }
+      }
+    },
+    {
+      "name": "Equipamentos - DELETE",
+      "request": {
+        "method": "DELETE",
+        "header": [ { "key": "Authorization", "value": "Bearer {{token}}" } ],
+        "url": {
+          "raw": "{{baseUrl}}/equipamentos/3",
+          "host": ["{{baseUrl}}"],
+          "path": ["equipamentos", "3"]
+        }
+      }
     }
   ]
 }
