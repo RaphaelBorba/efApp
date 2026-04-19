@@ -1,11 +1,11 @@
 package br.com.esg.energia.service;
 
+import br.com.esg.energia.domain.AlertaEnergia;
+import br.com.esg.energia.domain.ConsumoDiario;
 import br.com.esg.energia.domain.Equipamento;
 import br.com.esg.energia.domain.Setor;
-import br.com.esg.energia.domain.AlertaEnergia;
 import br.com.esg.energia.repository.*;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -31,20 +31,23 @@ public class GovernancaService {
         this.alertaRepo = alertaRepo;
     }
 
-    @Transactional
-    public BigDecimal validarMetaMensal(Long setorId, YearMonth anoMes) {
+    public BigDecimal validarMetaMensal(String setorId, YearMonth anoMes) {
         Setor setor = setorRepo.findById(setorId)
                 .orElseThrow(() -> new IllegalArgumentException("Setor não encontrado: " + setorId));
 
-        List<Equipamento> equipamentos = equipamentoRepo.findBySetor(setor);
-        List<Long> equipamentoIds = equipamentos.stream().map(Equipamento::getId).collect(Collectors.toList());
+        List<Equipamento> equipamentos = equipamentoRepo.findBySetorId(setor.getId());
+        List<String> equipamentoIds = equipamentos.stream().map(Equipamento::getId).collect(Collectors.toList());
         LocalDate inicio = anoMes.atDay(1);
         LocalDate fim = anoMes.atEndOfMonth();
 
-        BigDecimal consumoTotal = consumoRepo.somarConsumoPorEquipamentosEPeriodo(equipamentoIds, inicio, fim);
-        if (consumoTotal.compareTo(setor.getMetaConsumoMensal()) > 0) {
+        List<ConsumoDiario> consumos = consumoRepo.findByEquipamentoIdInAndDiaBetween(equipamentoIds, inicio, fim);
+        BigDecimal consumoTotal = consumos.stream()
+                .map(ConsumoDiario::getTotalKwh)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+
+        if (setor.getMetaConsumoMensal() != null && consumoTotal.compareTo(setor.getMetaConsumoMensal()) > 0) {
             AlertaEnergia alerta = new AlertaEnergia();
-            alerta.setSetor(setor);
+            alerta.setSetorId(setor.getId());
             alerta.setTipoAlerta("META_EXCEDIDA");
             alerta.setSeveridade("WARN");
             alerta.setMensagem("Consumo do setor no mês excedeu a meta");
@@ -53,5 +56,3 @@ public class GovernancaService {
         return consumoTotal;
     }
 }
-
-

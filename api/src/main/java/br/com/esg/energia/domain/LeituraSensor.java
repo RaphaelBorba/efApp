@@ -1,41 +1,34 @@
 package br.com.esg.energia.domain;
 
-import jakarta.persistence.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-@Entity
-@Table(name = "LEITURA_SENSOR")
+@Document(collection = "leituras_sensor")
 public class LeituraSensor {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "EQUIPAMENTO_ID", nullable = false)
-    private Equipamento equipamento;
-
-    @Column(name = "CONSUMO_KWH", nullable = false, precision = 15, scale = 6)
+    private String id;
+    private String equipamentoId;
     private BigDecimal consumoKwh;
-
-    @Column(name = "TS_LEITURA", nullable = false)
     private LocalDateTime timestampLeitura;
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public Equipamento getEquipamento() {
-        return equipamento;
+    public String getEquipamentoId() {
+        return equipamentoId;
     }
 
-    public void setEquipamento(Equipamento equipamento) {
-        this.equipamento = equipamento;
+    public void setEquipamentoId(String equipamentoId) {
+        this.equipamentoId = equipamentoId;
     }
 
     public BigDecimal getConsumoKwh() {
@@ -54,5 +47,3 @@ public class LeituraSensor {
         this.timestampLeitura = timestampLeitura;
     }
 }
-
-

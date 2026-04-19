@@ -27,21 +27,17 @@ public class AlertaController {
     @GetMapping
     @PreAuthorize("hasAnyRole('ANALISTA','GESTOR_SETOR','ADMIN')")
     public ResponseEntity<List<AlertaDtos.View>> consultar(@RequestParam(required = false) String tipo,
-                                                           @RequestParam(required = false) Long setorId,
-                                                           @RequestParam(required = false) Long equipamentoId,
+                                                           @RequestParam(required = false) String setorId,
+                                                           @RequestParam(required = false) String equipamentoId,
                                                            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime inicio,
                                                            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime fim) {
         List<AlertaEnergia> lista = alertaService.consultar(tipo, setorId, equipamentoId, inicio, fim);
         List<AlertaDtos.View> resp = lista.stream()
                 .map(a -> new AlertaDtos.View(
                         a.getId(), a.getTipoAlerta(), a.getSeveridade(), a.getMensagem(),
-                        a.getSetor() != null ? a.getSetor().getId() : null,
-                        a.getEquipamento() != null ? a.getEquipamento().getId() : null,
-                        a.getCriadoEm()
+                        a.getSetorId(), a.getEquipamentoId(), a.getCriadoEm()
                 ))
                 .toList();
         return ResponseEntity.ok(resp);
     }
 }
-
-

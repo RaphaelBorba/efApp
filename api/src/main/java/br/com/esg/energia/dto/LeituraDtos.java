@@ -9,12 +9,10 @@ import java.time.LocalDateTime;
 
 public class LeituraDtos {
     public record Create(
-            @NotNull Long equipamentoId,
+            @NotNull String equipamentoId,
             @NotNull @DecimalMin("0.0") BigDecimal consumoKwh,
             @NotNull @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime timestampLeitura
     ) {}
 
-    public record View(Long id, Long equipamentoId, BigDecimal consumoKwh, LocalDateTime timestampLeitura) {}
+    public record View(String id, String equipamentoId, BigDecimal consumoKwh, LocalDateTime timestampLeitura) {}
 }
-
-

@@ -1,58 +1,44 @@
 package br.com.esg.energia.domain;
 
-import jakarta.persistence.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
 
-@Entity
-@Table(name = "ALERTA_ENERGIA")
+@Document(collection = "alertas_energia")
 public class AlertaEnergia {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "EQUIPAMENTO_ID")
-    private Equipamento equipamento;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "SETOR_ID")
-    private Setor setor;
-
-    @Column(name = "TIPO_ALERTA", nullable = false, length = 30)
+    private String id;
+    private String equipamentoId;
+    private String setorId;
     private String tipoAlerta;
-
-    @Column(name = "MENSAGEM", length = 400)
     private String mensagem;
-
-    @Column(name = "SEVERIDADE", nullable = false, length = 20)
     private String severidade;
-
-    @Column(name = "CRIADO_EM", nullable = false)
     private LocalDateTime criadoEm = LocalDateTime.now();
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public Equipamento getEquipamento() {
-        return equipamento;
+    public String getEquipamentoId() {
+        return equipamentoId;
     }
 
-    public void setEquipamento(Equipamento equipamento) {
-        this.equipamento = equipamento;
+    public void setEquipamentoId(String equipamentoId) {
+        this.equipamentoId = equipamentoId;
     }
 
-    public Setor getSetor() {
-        return setor;
+    public String getSetorId() {
+        return setorId;
     }
 
-    public void setSetor(Setor setor) {
-        this.setor = setor;
+    public void setSetorId(String setorId) {
+        this.setorId = setorId;
     }
 
     public String getTipoAlerta() {
@@ -87,5 +73,3 @@ public class AlertaEnergia {
         this.criadoEm = criadoEm;
     }
 }
-
-
