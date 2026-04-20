@@ -1,41 +1,34 @@
 package br.com.esg.energia.domain;
 
-import jakarta.persistence.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-@Entity
-@Table(name = "CONSUMO_DIARIO")
+@Document(collection = "consumo_diario")
 public class ConsumoDiario {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "EQUIPAMENTO_ID", nullable = false)
-    private Equipamento equipamento;
-
-    @Column(name = "DIA", nullable = false)
+    private String id;
+    private String equipamentoId;
     private LocalDate dia;
-
-    @Column(name = "TOTAL_KWH", nullable = false, precision = 15, scale = 6)
     private BigDecimal totalKwh;
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public Equipamento getEquipamento() {
-        return equipamento;
+    public String getEquipamentoId() {
+        return equipamentoId;
     }
 
-    public void setEquipamento(Equipamento equipamento) {
-        this.equipamento = equipamento;
+    public void setEquipamentoId(String equipamentoId) {
+        this.equipamentoId = equipamentoId;
     }
 
     public LocalDate getDia() {
@@ -54,5 +47,3 @@ public class ConsumoDiario {
         this.totalKwh = totalKwh;
     }
 }
-
-

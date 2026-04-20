@@ -1,30 +1,24 @@
 package br.com.esg.energia.domain;
 
-import jakarta.persistence.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.math.BigDecimal;
 
-@Entity
-@Table(name = "SETOR")
+@Document(collection = "setores")
 public class Setor {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column(name = "NOME", nullable = false, length = 100)
+    private String id;
     private String nome;
-
-    @Column(name = "GESTOR", length = 100)
     private String gestor;
-
-    @Column(name = "META_CONSUMO_MENSAL", nullable = false, precision = 15, scale = 2)
     private BigDecimal metaConsumoMensal;
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -52,5 +46,3 @@ public class Setor {
         this.metaConsumoMensal = metaConsumoMensal;
     }
 }
-
-

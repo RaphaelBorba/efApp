@@ -28,19 +28,17 @@ public class LeituraController {
     @PreAuthorize("hasAnyRole('IOT_GATEWAY','ADMIN')")
     public ResponseEntity<LeituraDtos.View> criar(@Valid @RequestBody LeituraDtos.Create req) {
         LeituraSensor l = leituraService.registrarLeitura(req.equipamentoId(), req.consumoKwh(), req.timestampLeitura());
-        return ResponseEntity.ok(new LeituraDtos.View(l.getId(), l.getEquipamento().getId(), l.getConsumoKwh(), l.getTimestampLeitura()));
+        return ResponseEntity.ok(new LeituraDtos.View(l.getId(), l.getEquipamentoId(), l.getConsumoKwh(), l.getTimestampLeitura()));
     }
 
     @GetMapping
     @PreAuthorize("hasAnyRole('ANALISTA','GESTOR_SETOR','ADMIN')")
-    public ResponseEntity<List<LeituraDtos.View>> listar(@RequestParam Long equipamentoId,
+    public ResponseEntity<List<LeituraDtos.View>> listar(@RequestParam String equipamentoId,
                                                          @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime inicio,
                                                          @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime fim) {
         List<LeituraDtos.View> resp = leituraService.listarLeituras(equipamentoId, inicio, fim).stream()
-                .map(l -> new LeituraDtos.View(l.getId(), l.getEquipamento().getId(), l.getConsumoKwh(), l.getTimestampLeitura()))
+                .map(l -> new LeituraDtos.View(l.getId(), l.getEquipamentoId(), l.getConsumoKwh(), l.getTimestampLeitura()))
                 .toList();
         return ResponseEntity.ok(resp);
     }
 }
-
-

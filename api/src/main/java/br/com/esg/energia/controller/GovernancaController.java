@@ -25,12 +25,10 @@ public class GovernancaController {
 
     @PostMapping("/validar-meta-mensal")
     @PreAuthorize("hasAnyRole('GESTOR_SETOR','ADMIN')")
-    public ResponseEntity<GovernancaDtos.ValidarMetaResponse> validar(@RequestParam Long setorId,
+    public ResponseEntity<GovernancaDtos.ValidarMetaResponse> validar(@RequestParam String setorId,
                                                                       @RequestParam String anoMes) {
         YearMonth ym = YearMonth.parse(anoMes);
         var consumo = governancaService.validarMetaMensal(setorId, ym);
         return ResponseEntity.ok(new GovernancaDtos.ValidarMetaResponse(anoMes, setorId, consumo));
     }
 }
-
-

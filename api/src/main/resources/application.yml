@@ -1,22 +1,9 @@
 spring:
   application:
     name: ef-energia-api
-  datasource:
-    url: jdbc:oracle:thin:@oracle:1521:XE
-    username: ${ORACLE_USERNAME:system}
-    password: ${ORACLE_PASSWORD:oracle}
-    driver-class-name: oracle.jdbc.OracleDriver
-  jpa:
-    hibernate:
-      ddl-auto: validate
-    open-in-view: false
-    properties:
-      hibernate:
-        jdbc:
-          lob:
-            non_contextual_creation: true
-  flyway:
-    enabled: true
+  data:
+    mongodb:
+      uri: ${MONGO_URI:mongodb://localhost:27017/efenergia}
 
 management:
   endpoints:
@@ -36,4 +23,3 @@ app:
 
 server:
   port: 8080
-

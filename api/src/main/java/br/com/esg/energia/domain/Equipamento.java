@@ -1,43 +1,34 @@
 package br.com.esg.energia.domain;
 
-import jakarta.persistence.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.math.BigDecimal;
 
-@Entity
-@Table(name = "EQUIPAMENTO")
+@Document(collection = "equipamentos")
 public class Equipamento {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "SETOR_ID", nullable = false)
-    private Setor setor;
-
-    @Column(name = "NOME", nullable = false, length = 100)
+    private String id;
+    private String setorId;
     private String nome;
-
-    @Column(name = "TIPO", length = 60)
     private String tipo;
-
-    @Column(name = "POTENCIA_NOMINAL", nullable = false, precision = 10, scale = 2)
     private BigDecimal potenciaNominal;
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public Setor getSetor() {
-        return setor;
+    public String getSetorId() {
+        return setorId;
     }
 
-    public void setSetor(Setor setor) {
-        this.setor = setor;
+    public void setSetorId(String setorId) {
+        this.setorId = setorId;
     }
 
     public String getNome() {
@@ -64,5 +55,3 @@ public class Equipamento {
         this.potenciaNominal = potenciaNominal;
     }
 }
-
-
