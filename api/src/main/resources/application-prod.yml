@@ -1,0 +1,15 @@
+spring:
+  data:
+    mongodb:
+      uri: ${MONGO_URI}
+
+logging:
+  level:
+    root: WARN
+    br.com.esg: INFO
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health

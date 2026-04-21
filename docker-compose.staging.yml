@@ -1,0 +1,47 @@
+version: '3.8'
+
+# Ambiente de homologação (staging)
+# Uso: docker compose -f docker-compose.staging.yml up --build
+
+services:
+  mongo-staging:
+    image: mongo:6
+    container_name: ef-mongo-staging
+    ports:
+      - "27018:27017"
+    volumes:
+      - mongo_staging_data:/data/db
+    environment:
+      - MONGO_INITDB_DATABASE=efenergia_staging
+    networks:
+      - ef-staging
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  api-staging:
+    build: ./api
+    container_name: ef-api-staging
+    environment:
+      - MONGO_URI=mongodb://mongo-staging:27017/efenergia_staging
+      - APP_JWT_SECRET=${APP_JWT_SECRET:-staging_secret_troque_antes_de_usar}
+      - APP_JWT_EXPIRATION_SECONDS=${APP_JWT_EXPIRATION_SECONDS:-3600}
+      - SPRING_PROFILES_ACTIVE=staging
+    ports:
+      - "8081:8080"
+    depends_on:
+      mongo-staging:
+        condition: service_healthy
+    networks:
+      - ef-staging
+    restart: unless-stopped
+
+networks:
+  ef-staging:
+    driver: bridge
+
+volumes:
+  mongo_staging_data:
