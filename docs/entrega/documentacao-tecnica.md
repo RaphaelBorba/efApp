@@ -109,10 +109,11 @@ docker-compose -f docker-compose.prod.yml up --build
 
 ## 4. Prints do pipeline rodando
 
-> Inserir prints do GitHub Actions aqui:
-> - Print do job "Build e Testes" executando
-> - Print dos testes passando
-> - Print do deploy de staging/produção
+### Pipeline em execução — Build e Testes rodando
+![Pipeline em execução](print-pipeline-em-execucao.png)
+
+### Pipeline concluído — Status: Success (22s)
+![Pipeline concluído](print-pipeline-concluido.png)
 
 ---
 
