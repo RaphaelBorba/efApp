@@ -1,8 +1,13 @@
 # EF Energia — Cidades ESG Inteligentes
 ## Documentação Técnica — DevOps
 
-**Integrantes:** [SEU NOME AQUI]  
-**Curso:** [SEU CURSO]  
+**Integrantes:**
+- Adryel Almeida da Silva — adryelsilva99@gmail.com
+- Raphael Borba da Silva Xavier — raphaelbsx@gmail.com
+- Vitor Fonseca Leite — vitor1712work@gmail.com
+- Pedro Henrique Pires do Nascimento — dckpedro@gmail.com
+- Caio Vila Nova Pantoja — caiopantoja1@hotmail.com
+
 **Data:** Abril de 2026
 
 ---
