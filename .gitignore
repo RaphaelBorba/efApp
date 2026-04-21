@@ -3,3 +3,6 @@ api/target/
 *.jar
 *.jar.original
 .DS_Store
+.idea/
+*.iml
+.env
