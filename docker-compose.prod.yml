@@ -1,0 +1,51 @@
+version: '3.8'
+
+# Ambiente de produção
+# Uso: docker compose -f docker-compose.prod.yml up --build
+# IMPORTANTE: defina APP_JWT_SECRET via variável de ambiente ou arquivo .env
+
+services:
+  mongo-prod:
+    image: mongo:6
+    container_name: ef-mongo-prod
+    volumes:
+      - mongo_prod_data:/data/db
+    environment:
+      - MONGO_INITDB_DATABASE=efenergia_prod
+    networks:
+      - ef-prod
+    restart: always
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 15s
+      timeout: 10s
+      retries: 5
+
+  api-prod:
+    build: ./api
+    container_name: ef-api-prod
+    environment:
+      - MONGO_URI=mongodb://mongo-prod:27017/efenergia_prod
+      - APP_JWT_SECRET=${APP_JWT_SECRET}
+      - APP_JWT_EXPIRATION_SECONDS=${APP_JWT_EXPIRATION_SECONDS:-7200}
+      - SPRING_PROFILES_ACTIVE=prod
+    ports:
+      - "8080:8080"
+    depends_on:
+      mongo-prod:
+        condition: service_healthy
+    networks:
+      - ef-prod
+    restart: always
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 512M
+
+networks:
+  ef-prod:
+    driver: bridge
+
+volumes:
+  mongo_prod_data:
