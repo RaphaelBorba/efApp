@@ -28,4 +28,4 @@ jobs:
         run: cd api && mvn test
 
       - name: Build Docker
-        run: docker build -t smart-energy ./api
+        run: docker build -t smart-energy .
