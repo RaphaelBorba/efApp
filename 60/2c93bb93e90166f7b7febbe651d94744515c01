@@ -1,0 +1,85 @@
+api/src/test/java/br/com/esg/energia/bdd/steps/CommonSteps.java
+  s_63a361c95cdb0d::t_9147968bbd6b84 26
+  s_63a361c95cdb0d::t_50d453dd0100af 10,12-13,19-20,70,76,82,88,94,100
+  s_63a361c95cdb0d::t_bf43c073e00725 48-57
+  s_63a361c95cdb0d::t_89392082562611 1-9,11,14-18,21-25,27-47,58-69,71-75,77-81,83-87,89-93,95-99,101-104
+api/src/test/resources/features/leituras.feature
+  s_63a361c95cdb0d::t_3333c9470ee01e 30-31,33
+  s_63a361c95cdb0d::t_bed3ffb9dc0bb2 1-11,13-19,21-22,27-29,32
+  s_63a361c95cdb0d::t_5bc75747144010 12,20,23-26
+api/src/test/java/br/com/esg/energia/bdd/CucumberRunnerTest.java
+  s_63a361c95cdb0d::t_4452aa2203a105 17
+api/src/test/resources/features/autenticacao.feature
+  s_63a361c95cdb0d::t_4cc2fc3c9b769f 1-7,10-13,17,19
+  s_63a361c95cdb0d::t_c7c454bfad86af 8-9
+  s_63a361c95cdb0d::t_affdefc40c931b 18,20
+  s_63a361c95cdb0d::t_f97813b3f3e19d 14-16
+api/src/test/resources/features/equipamentos.feature
+  s_63a361c95cdb0d::t_88a4ce0b12fc8f 1-15,18-20,22-25,27-28,30-36
+  s_63a361c95cdb0d::t_9a4d6b8a8e590c 21,26,29
+  s_63a361c95cdb0d::t_37a6980cb770da 16-17
+api/src/test/java/br/com/esg/energia/bdd/SetupHooks.java
+  s_63a361c95cdb0d::t_f76a1792bbb76c 6,19-20
+  s_63a361c95cdb0d::t_2dba1d737ae360 30
+  s_63a361c95cdb0d::t_40ba9debbabd4a 1-5,7-18,21-29,31-47
+api/src/test/resources/schemas/leitura-schema.json
+  s_63a361c95cdb0d::t_eeea661ac14311 1-11
+api/src/test/resources/schemas/equipamento-list-schema.json
+  s_63a361c95cdb0d::t_99db4fe1300b97 1-16
+api/src/test/java/br/com/esg/energia/bdd/steps/EquipamentoSteps.java
+  s_63a361c95cdb0d::t_825fdfc28ebf4c 7,16-17,20,37,49-50
+  s_63a361c95cdb0d::t_9f69a2cd67ad49 1-6,8-15,18-19,21-36,38-48,51-52
+api/src/test/resources/application-test.yml
+  s_63a361c95cdb0d::t_108af5abb7300a 1-4
+api/src/test/resources/schemas/auth-schema.json
+  s_63a361c95cdb0d::t_483ebabaab1aed 1-12
+api/src/test/resources/schemas/setor-list-schema.json
+  s_63a361c95cdb0d::t_6eaea8995efc15 1-14
+api/src/test/java/br/com/esg/energia/bdd/steps/AuthSteps.java
+  s_63a361c95cdb0d::t_870ad0c3a826b3 1-6,8-15,18-19,21-29,32-40,43-44
+  s_63a361c95cdb0d::t_905625ecb53869 7,16-17,20,41-42
+  s_63a361c95cdb0d::t_352a7decc0e6a0 30-31
+api/src/test/java/br/com/esg/energia/bdd/CucumberSpringConfiguration.java
+  s_63a361c95cdb0d::t_67900bed9e352a 5
+  s_63a361c95cdb0d::t_d4898c7805746a 1-4,9-11,13,25
+  s_63a361c95cdb0d::t_bd3abda5f2e3e1 12
+  s_63a361c95cdb0d::t_93df98e574660f 6-8,14-24
+api/src/test/resources/schemas/alerta-list-schema.json
+  s_63a361c95cdb0d::t_621580db5ce49e 6,9
+  s_63a361c95cdb0d::t_c05d7876ad23d8 1-5,7-8,10-17
+api/pom.xml
+  s_63a361c95cdb0d::t_fe23178623d9a1 94,96-102
+api/src/test/java/br/com/esg/energia/bdd/steps/LeituraSteps.java
+  s_63a361c95cdb0d::t_ae41dac9906ad6 1-7,9-19,22-23,25-28,30-40,43-49,51-57,60-66,68-74,76-89,92-94,96-104,106-107
+  s_63a361c95cdb0d::t_9f82b7244f4983 105
+  s_63a361c95cdb0d::t_ffe54970ea0101 8,20-21,24,29,41-42,50,58-59,67,75,90-91,95
+api/src/test/java/br/com/esg/energia/bdd/steps/GovernancaSteps.java
+  s_63a361c95cdb0d::t_6dfe558f379e57 5,11-12,15,27
+  s_63a361c95cdb0d::t_eaf7d142e70952 37-47
+  s_63a361c95cdb0d::t_3595599ff0feae 1-4,6-10,13-14,16-26,28-36,48
+api/src/test/resources/features/governanca.feature
+  s_63a361c95cdb0d::t_4d195786a27d88 9
+  s_63a361c95cdb0d::t_16d82c14e3a8b0 8,14-16
+  s_63a361c95cdb0d::t_4948fe68ed9283 1-7,10-13,17-23
+api/src/test/resources/schemas/governanca-schema.json
+  s_63a361c95cdb0d::t_2a48555bd2233d 4,8
+  s_63a361c95cdb0d::t_8a64dd192009f1 1-3,5-7,9-10
+api/src/test/java/br/com/esg/energia/bdd/ScenarioContext.java
+  s_63a361c95cdb0d::t_5cad28bc487e49 1-31
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.5",
+  "base_commit_sha": "602c93bb93e90166f7b7febbe651d94744515c01",
+  "prompts": {},
+  "sessions": {
+    "s_63a361c95cdb0d": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "46aa2841-83b9-499d-830c-a30e4fd4a607",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Raphael Borba <raphaelbsx@gmail.com>"
+    }
+  }
+}
