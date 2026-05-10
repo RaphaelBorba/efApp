@@ -81,6 +81,120 @@ cp .env.example .env
 
 ---
 
+## Testes Automatizados (BDD)
+
+### Tecnologias
+
+| Ferramenta | Finalidade |
+|---|---|
+| **Cucumber 7** | BDD — executa cenários `.feature` em Gherkin |
+| **RestAssured** | Testes de API HTTP (status code, corpo JSON) |
+| **JSON Schema Validator** | Validação de contrato das respostas |
+| **Testcontainers** | MongoDB isolado por test run (sem dependência externa) |
+| **JUnit 5** | Runner principal |
+
+### Pré-requisitos para rodar os testes
+
+| Ferramenta | Versão mínima |
+|---|---|
+| Java | 17+ |
+| Docker | 24+ (necessário para o Testcontainers subir o MongoDB) |
+| Maven | 3.9+ (ou use o wrapper `./mvnw`) |
+
+> **Nota:** O Docker precisa estar em execução. No Mac, inicie o Colima: `colima start`
+
+### Executar os testes localmente
+
+```bash
+# Dentro do diretório api/
+cd api
+
+# Rodar todos os testes (unitários + BDD)
+mvn test
+
+# Ou com o Maven Wrapper (sem Maven instalado)
+./mvnw test
+
+# Ou via Docker (sem Java instalado)
+docker run --rm \
+  -v "$(pwd)":/app \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  -w /app \
+  maven:3.9-eclipse-temurin-17 \
+  mvn test
+```
+
+### Estrutura dos testes
+
+```
+api/src/test/
+├── java/br/com/esg/energia/
+│   ├── bdd/
+│   │   ├── CucumberRunnerTest.java       ← Runner JUnit Platform Suite
+│   │   ├── CucumberSpringConfiguration.java ← @SpringBootTest + Testcontainers
+│   │   ├── ScenarioContext.java          ← Estado compartilhado entre steps
+│   │   ├── SetupHooks.java               ← @Before: obtém token e setorId
+│   │   └── steps/
+│   │       ├── AuthSteps.java            ← Steps de autenticação
+│   │       ├── CommonSteps.java          ← Steps genéricos (GET, status code)
+│   │       ├── EquipamentoSteps.java     ← Steps de equipamentos/setores
+│   │       ├── GovernancaSteps.java      ← Steps de governança
+│   │       └── LeituraSteps.java         ← Steps de leituras
+│   └── service/                          ← Testes unitários (Mockito)
+└── resources/
+    ├── features/
+    │   ├── autenticacao.feature          ← 3 cenários de auth
+    │   ├── equipamentos.feature          ← 5 cenários de equipamentos/setores
+    │   ├── governanca.feature            ← 3 cenários de governança
+    │   └── leituras.feature              ← 4 cenários de leituras
+    ├── schemas/
+    │   ├── auth-schema.json              ← Contrato de autenticação
+    │   ├── alerta-list-schema.json       ← Contrato de alertas
+    │   ├── equipamento-list-schema.json  ← Contrato de equipamentos
+    │   ├── governanca-schema.json        ← Contrato de governança
+    │   ├── leitura-schema.json           ← Contrato de leitura
+    │   └── setor-list-schema.json        ← Contrato de setores
+    ├── application-test.yml              ← Profile de teste (MongoDB via TC)
+    └── mockito-extensions/
+        └── org.mockito.plugins.MockMaker ← SubclassMockMaker (Mockito 5.x fix)
+```
+
+### Cenários BDD cobertos (15 no total)
+
+| Feature | Cenários |
+|---|---|
+| **Autenticação** | Token JWT gerado com sucesso · Acesso bloqueado com token inválido · Acesso bloqueado sem token |
+| **Leituras** | Registro de leitura normal · Leitura crítica gera alerta · Listagem de leituras · Equipamento inexistente |
+| **Equipamentos** | Listagem · Cadastro válido · Sem setor (400) · ID inexistente · Listagem de setores |
+| **Governança** | Validação de meta mensal · Acesso bloqueado sem auth · Consulta de alertas |
+
+### Relatório HTML
+
+Após executar os testes, o relatório interativo fica em:
+
+```
+api/target/cucumber-reports/report.html
+```
+
+### Validação de contrato (JSON Schema)
+
+Cada API tem um JSON Schema em `src/test/resources/schemas/` que valida a estrutura da resposta. Exemplo para alertas:
+
+```json
+{
+  "type": "array",
+  "items": {
+    "required": ["id", "tipo", "severidade", "criadoEm"],
+    "properties": {
+      "tipo": { "enum": ["CONSUMO_CRITICO", "OCIOSIDADE", "META_EXCEDIDA"] },
+      "severidade": { "enum": ["INFO", "WARN", "CRITICAL"] }
+    }
+  }
+}
+```
+
+---
+
 ## Pipeline CI/CD
 
 ### Ferramenta utilizada
