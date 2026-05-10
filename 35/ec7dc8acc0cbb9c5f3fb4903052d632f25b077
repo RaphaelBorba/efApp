@@ -1,0 +1,23 @@
+api/src/test/resources/mockito-extensions/org.mockito.plugins.MockMaker
+  s_63a361c95cdb0d::t_162d0c0e23714e 1
+api/pom.xml
+  s_63a361c95cdb0d::t_c457a19e96beeb 97
+  s_63a361c95cdb0d::t_e0a375e5a0f427 57-96,99-101
+  s_63a361c95cdb0d::t_06de9e5e95745d 98
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.5",
+  "base_commit_sha": "35ec7dc8acc0cbb9c5f3fb4903052d632f25b077",
+  "prompts": {},
+  "sessions": {
+    "s_63a361c95cdb0d": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "46aa2841-83b9-499d-830c-a30e4fd4a607",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Raphael Borba <raphaelbsx@gmail.com>"
+    }
+  }
+}
