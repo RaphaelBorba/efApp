@@ -1,0 +1,16 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": ["id", "nome", "tipo", "potenciaNominal", "setorId"],
+    "properties": {
+      "id": { "type": "string" },
+      "nome": { "type": "string" },
+      "tipo": { "type": "string" },
+      "potenciaNominal": { "type": "number" },
+      "setorId": { "type": "string" },
+      "setorNome": { "type": ["string", "null"] }
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": ["id", "nome"],
+    "properties": {
+      "id": { "type": "string" },
+      "nome": { "type": "string" },
+      "gestor": { "type": ["string", "null"] },
+      "metaConsumoMensal": { "type": ["number", "null"] }
+    }
+  }
+}
