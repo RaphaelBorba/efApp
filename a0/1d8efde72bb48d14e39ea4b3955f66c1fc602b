@@ -1,0 +1,33 @@
+api/src/test/resources/features/leituras.feature
+  s_63a361c95cdb0d::t_798f33a5140213 3-6
+README.md
+  s_63a361c95cdb0d::t_4e7d273ec1b78c 162,166-185
+api/src/test/resources/schemas/equipamento-schema.json
+  s_63a361c95cdb0d::t_627466d2f4ccdb 1-13
+api/src/test/resources/features/equipamentos.feature
+  s_63a361c95cdb0d::t_dd9ce2d2054755 3,5-6,20,32-53
+api/src/test/java/br/com/esg/energia/bdd/steps/CommonSteps.java
+  s_63a361c95cdb0d::t_d6fe65557459eb 87-92
+api/src/test/resources/features/autenticacao.feature
+  s_63a361c95cdb0d::t_7fc6caa4cb9f0b 3-6
+api/src/test/java/br/com/esg/energia/bdd/steps/EquipamentoSteps.java
+  s_63a361c95cdb0d::t_f9472201257448 9,39-43,48,54-105,110-113
+api/src/test/resources/features/governanca.feature
+  s_63a361c95cdb0d::t_e72e2b3ac29e78 5-6
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.5",
+  "base_commit_sha": "a01d8efde72bb48d14e39ea4b3955f66c1fc602b",
+  "prompts": {},
+  "sessions": {
+    "s_63a361c95cdb0d": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "46aa2841-83b9-499d-830c-a30e4fd4a607",
+        "model": "claude-opus-4-7"
+      },
+      "human_author": "Raphael Borba <raphaelbsx@gmail.com>"
+    }
+  }
+}
