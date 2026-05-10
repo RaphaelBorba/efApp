@@ -1,0 +1,21 @@
+README.md
+  s_63a361c95cdb0d::t_30d165e026e239 84-197
+.github/workflows/ci.yml
+  s_63a361c95cdb0d::t_e98fcf9da3f84a 5,7
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.5",
+  "base_commit_sha": "7208040b76dfe4aa190012d4976b7d2d2b39ad9a",
+  "prompts": {},
+  "sessions": {
+    "s_63a361c95cdb0d": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "46aa2841-83b9-499d-830c-a30e4fd4a607",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Raphael Borba <raphaelbsx@gmail.com>"
+    }
+  }
+}
