@@ -159,14 +159,30 @@ api/src/test/
         └── org.mockito.plugins.MockMaker ← SubclassMockMaker (Mockito 5.x fix)
 ```
 
-### Cenários BDD cobertos (15 no total)
+### Cenários BDD cobertos (19 no total)
 
 | Feature | Cenários |
 |---|---|
-| **Autenticação** | Token JWT gerado com sucesso · Acesso bloqueado com token inválido · Acesso bloqueado sem token |
-| **Leituras** | Registro de leitura normal · Leitura crítica gera alerta · Listagem de leituras · Equipamento inexistente |
-| **Equipamentos** | Listagem · Cadastro válido · Sem setor (400) · ID inexistente · Listagem de setores |
-| **Governança** | Validação de meta mensal · Acesso bloqueado sem auth · Consulta de alertas |
+| **Autenticação** (pilar G) | Token JWT gerado com sucesso · Acesso bloqueado com token inválido · Acesso bloqueado sem token |
+| **Leituras** (pilar E) | Registro de leitura normal · Leitura crítica gera alerta · Listagem de leituras · Equipamento inexistente |
+| **Equipamentos** (pilar G) | Listagem · Cadastro válido · Sem setor (400) · ID inexistente · Atualização (PUT) · Atualização inexistente · Remoção (DELETE) · Remoção inexistente · Listagem de setores |
+| **Governança** (pilares E+G) | Validação de meta mensal · Acesso bloqueado sem auth · Consulta de alertas |
+
+### Cobertura de endpoints (11/11)
+
+| Método | Endpoint | Cenários |
+|---|---|---|
+| POST | `/auth/token` | Autenticação positiva |
+| GET | `/setores` | Listagem de setores · Sem token · Token inválido |
+| GET | `/equipamentos` | Listagem |
+| GET | `/equipamentos/{id}` | ID inexistente |
+| POST | `/equipamentos` | Cadastro válido · Sem setor |
+| PUT | `/equipamentos/{id}` | Atualização válida · ID inexistente |
+| DELETE | `/equipamentos/{id}` | Remoção válida · ID inexistente |
+| POST | `/leituras` | Leitura normal · Leitura crítica · Equipamento inexistente |
+| GET | `/leituras` | Listagem por equipamento |
+| GET | `/alertas` | Consulta de alertas · Verificação de alerta gerado |
+| POST | `/governanca/validar-meta-mensal` | Validação de meta · Sem auth |
 
 ### Relatório HTML
 

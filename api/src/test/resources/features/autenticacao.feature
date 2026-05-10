@@ -1,9 +1,9 @@
 # language: pt
 
-Funcionalidade: Autenticação de usuários
-  Como um sistema IoT ou usuário do sistema
-  Quero obter um token JWT
-  Para acessar os recursos protegidos da API
+Funcionalidade: Autenticação e controle de acesso
+  Como sistema IoT ou usuário autorizado
+  Quero obter um token JWT e ter meu acesso validado por perfil
+  Para garantir governança, rastreabilidade e segurança dos dados energéticos (pilar G de ESG)
 
   Cenário: Autenticação com dados válidos gera token JWT
     Quando eu envio uma requisição POST para "/auth/token" com usuário "admin" e role "ROLE_ADMIN"

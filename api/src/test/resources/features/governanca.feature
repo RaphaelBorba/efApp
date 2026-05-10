@@ -2,8 +2,8 @@
 
 Funcionalidade: Governança e compliance energético
   Como gestor de setor
-  Quero validar o consumo mensal contra a meta estabelecida
-  Para garantir a conformidade com os objetivos ESG da organização
+  Quero validar o consumo mensal contra a meta estabelecida e consultar alertas
+  Para garantir conformidade regulatória e os objetivos ESG da organização (pilares E e G)
 
   Cenário: Validação de meta mensal de setor existente retorna consumo total
     Dado que estou autenticado como "admin"

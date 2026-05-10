@@ -84,6 +84,12 @@ public class CommonSteps {
                 .body(JsonSchemaValidator.matchesJsonSchemaInClasspath("schemas/equipamento-list-schema.json"));
     }
 
+    @E("a resposta deve seguir o schema de equipamento individual")
+    public void schemaEquipamentoIndividual() {
+        ctx.getLastResponse().then()
+                .body(JsonSchemaValidator.matchesJsonSchemaInClasspath("schemas/equipamento-schema.json"));
+    }
+
     @E("a resposta deve seguir o schema de setor")
     public void schemaSetor() {
         ctx.getLastResponse().then()

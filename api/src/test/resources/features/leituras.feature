@@ -1,9 +1,9 @@
 # language: pt
 
-Funcionalidade: Registro de leituras de sensores
-  Como um gateway IoT
-  Quero registrar leituras de consumo de energia
-  Para monitorar a eficiência energética dos equipamentos
+Funcionalidade: Registro e monitoramento de leituras de consumo energético
+  Como gateway IoT integrado ao sistema
+  Quero registrar leituras de consumo dos equipamentos em tempo real
+  Para monitorar a eficiência energética e identificar consumos críticos (pilar E de ESG)
 
   Cenário: Registro de leitura com consumo normal
     Dado que existe um equipamento com potência nominal de 10.0 kW
