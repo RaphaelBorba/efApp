@@ -6,3 +6,7 @@ api/target/
 .idea/
 *.iml
 .env
+
+# Claude / AI assistants
+.claude/
+CLAUDE.md
