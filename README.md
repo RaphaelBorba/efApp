@@ -105,17 +105,18 @@ cp .env.example .env
 
 ### Executar os testes localmente
 
+**Opção 1 — Com Maven instalado:**
+
 ```bash
-# Dentro do diretório api/
+cd api
+mvn test
+```
+
+**Opção 2 — Via Docker (sem Java/Maven local):**
+
+```bash
 cd api
 
-# Rodar todos os testes (unitários + BDD)
-mvn test
-
-# Ou com o Maven Wrapper (sem Maven instalado)
-./mvnw test
-
-# Ou via Docker (sem Java instalado)
 docker run --rm \
   -v "$(pwd)":/app \
   -v /var/run/docker.sock:/var/run/docker.sock \
@@ -123,6 +124,16 @@ docker run --rm \
   maven:3.9-eclipse-temurin-17 \
   mvn test
 ```
+
+> 💡 O volume `/var/run/docker.sock` é necessário para o Testcontainers conseguir subir o MongoDB.
+
+Após a execução, você verá algo como:
+```
+Tests run: 43, Failures: 0, Errors: 0, Skipped: 0
+BUILD SUCCESS
+```
+
+Onde **43 testes = 24 unitários (Mockito) + 19 cenários BDD (Cucumber)**.
 
 ### Estrutura dos testes
 
@@ -144,13 +155,14 @@ api/src/test/
 └── resources/
     ├── features/
     │   ├── autenticacao.feature          ← 3 cenários de auth
-    │   ├── equipamentos.feature          ← 5 cenários de equipamentos/setores
+    │   ├── equipamentos.feature          ← 9 cenários de equipamentos/setores
     │   ├── governanca.feature            ← 3 cenários de governança
     │   └── leituras.feature              ← 4 cenários de leituras
     ├── schemas/
     │   ├── auth-schema.json              ← Contrato de autenticação
-    │   ├── alerta-list-schema.json       ← Contrato de alertas
-    │   ├── equipamento-list-schema.json  ← Contrato de equipamentos
+    │   ├── alerta-list-schema.json       ← Contrato de alertas (lista)
+    │   ├── equipamento-list-schema.json  ← Contrato de equipamentos (lista)
+    │   ├── equipamento-schema.json       ← Contrato de equipamento individual
     │   ├── governanca-schema.json        ← Contrato de governança
     │   ├── leitura-schema.json           ← Contrato de leitura
     │   └── setor-list-schema.json        ← Contrato de setores
@@ -215,9 +227,9 @@ Cada API tem um JSON Schema em `src/test/resources/schemas/` que valida a estrut
 
 ### Ferramenta utilizada
 
-**GitHub Actions** — configurado em `.github/workflows/ci-cd.yml`.
+**GitHub Actions** — configurado em `.github/workflows/ci.yml`.
 
-O pipeline é acionado automaticamente a cada push nas branches `main` e `develop`, e também em pull requests para `main`.
+O pipeline é acionado automaticamente a cada push nas branches `main`, `master`, `develop`, `feature/devops-setup` e `feature/bdd-tests`, e em pull requests para `main` ou `master`.
 
 ### Etapas do pipeline
 
@@ -229,7 +241,7 @@ Push/PR
   │     ├── Setup Java 17 (Temurin)
   │     ├── Cache do repositório Maven
   │     ├── mvn clean package  →  compila o projeto
-  │     └── mvn test           →  executa os 24 testes unitários
+  │     └── mvn test           →  executa 43 testes (24 unitários + 19 BDD)
   │
   ├── 2. Deploy Staging  (apenas na branch develop)
   │     ├── Build da imagem Docker
@@ -240,9 +252,11 @@ Push/PR
         └── docker compose -f docker-compose.prod.yml up
 ```
 
-### Testes automatizados
+### Testes automatizados executados
 
-O pipeline executa 24 testes unitários cobrindo os quatro services da aplicação:
+O pipeline executa **43 testes** ao todo: 24 unitários + 19 cenários BDD.
+
+**Testes unitários** (Mockito):
 
 | Classe de teste | Testes | O que valida |
 |---|---|---|
@@ -250,6 +264,15 @@ O pipeline executa 24 testes unitários cobrindo os quatro services da aplicaç�
 | `LeituraServiceTest` | 5 | Registro de leitura, geração de alerta crítico, acúmulo diário |
 | `AlertaServiceTest` | 5 | Filtros por tipo, setor, equipamento e período |
 | `GovernancaServiceTest` | 4 | Validação de meta mensal, geração de alerta META_EXCEDIDA |
+
+**Testes BDD** (Cucumber + RestAssured + Testcontainers):
+
+| Feature | Cenários | Foco |
+|---|---|---|
+| `autenticacao.feature` | 3 | Geração de token JWT, bloqueio sem/com token inválido |
+| `leituras.feature` | 4 | Registro de leitura IoT, alerta crítico, listagem |
+| `equipamentos.feature` | 9 | CRUD completo de equipamentos + listagem de setores |
+| `governanca.feature` | 3 | Validação de meta mensal, alertas, controle de acesso |
 
 Rodar testes localmente:
 ```bash
@@ -397,7 +420,7 @@ efApp/
 │   │   │   ├── application.yml
 │   │   │   ├── application-staging.yml
 │   │   │   └── application-prod.yml
-│   │   └── test/java/           # 24 testes unitários
+│   │   └── test/                # 24 unitários + 19 cenários BDD
 │   └── Dockerfile
 ├── docker-compose.yml           # Desenvolvimento
 ├── docker-compose.staging.yml   # Homologação
@@ -442,8 +465,11 @@ Documentação interativa disponível em: `http://localhost:8080/swagger-ui.html
 |---|---|
 | Projeto compactado em .ZIP com estrutura organizada | ☐ |
 | Dockerfile funcional | ✅ |
-| docker-compose.yml ou arquivos Kubernetes | ✅ |
-| Pipeline com etapas de build, teste e deploy | ☐ |
-| README.md com instruções e prints | ✅ |
+| docker-compose.yml para dev/staging/prod | ✅ |
+| Pipeline CI com build e testes (GitHub Actions) | ✅ |
+| README.md com instruções de execução | ✅ |
+| Testes BDD em Gherkin (mínimo 3 cenários) | ✅ (19 cenários) |
+| Testes de API para todos os endpoints | ✅ (11/11) |
+| Validação de contrato com JSON Schema | ✅ (7 schemas) |
 | Documentação técnica com evidências (PDF ou PPT) | ☐ |
 | Deploy realizado nos ambientes staging e produção | ☐ |
