@@ -1,0 +1,23 @@
+README.md
+  s_63a361c95cdb0d::t_a9f5abc11c65dc 230,232,244,255-257,259,268-275
+  s_63a361c95cdb0d::t_e09e54ea0d6e46 423
+  s_63a361c95cdb0d::t_67dfa308dff7f2 158,163-165
+  s_63a361c95cdb0d::t_57fab2399e1ee0 468-473
+  s_63a361c95cdb0d::t_8aacbaff70672b 108-109,113-115,117-118,128-136
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.6",
+  "base_commit_sha": "837672b8c0c1094ed1716a09c6b563a915b13ca4",
+  "prompts": {},
+  "sessions": {
+    "s_63a361c95cdb0d": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "46aa2841-83b9-499d-830c-a30e4fd4a607",
+        "model": "claude-opus-4-7"
+      },
+      "human_author": "Raphael Borba <raphaelbsx@gmail.com>"
+    }
+  }
+}
