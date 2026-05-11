@@ -1,0 +1,19 @@
+docs/INSTRUCOES-CAPTURA-EVIDENCIAS.md
+  s_63a361c95cdb0d::t_fbfe1dffb755b1 1-385
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.6",
+  "base_commit_sha": "36a6a5d1ca3135d924a750c96e543e753c870ba1",
+  "prompts": {},
+  "sessions": {
+    "s_63a361c95cdb0d": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "46aa2841-83b9-499d-830c-a30e4fd4a607",
+        "model": "claude-opus-4-7"
+      },
+      "human_author": "Raphael Borba <raphaelbsx@gmail.com>"
+    }
+  }
+}
