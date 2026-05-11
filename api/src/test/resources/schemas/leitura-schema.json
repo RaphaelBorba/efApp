@@ -1,0 +1,11 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "required": ["id", "equipamentoId", "consumoKwh", "timestampLeitura"],
+  "properties": {
+    "id": { "type": "string", "minLength": 1 },
+    "equipamentoId": { "type": "string", "minLength": 1 },
+    "consumoKwh": { "type": "number" },
+    "timestampLeitura": { "type": "string" }
+  }
+}
